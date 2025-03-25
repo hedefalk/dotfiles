@@ -18,6 +18,7 @@
     any-nix-shell
     atuin # shell history sync
     awscli2
+    bitwarden-cli
     colima # docker-desktop alternative
     coreutils # gnu ls among things
     coursier
@@ -84,7 +85,6 @@
       "arduino-ide"
       "bankid"
       "bitwarden"
-      "bitwarden-cli"
       "blender"
       "calibre"
       "cardinal"
