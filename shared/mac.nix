@@ -82,7 +82,7 @@
     casks = [
       "adobe-digital-editions" # library epub reader
       "alt-tab" # alternative switcher
-      "arduino"
+      "arduino-ide"
       "bankid"
       "blender"
       "calibre"
