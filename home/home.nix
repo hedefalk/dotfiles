@@ -54,7 +54,11 @@
                 }
                 {
                     name = "replay";
-                    src = pkgs.fishPlugins.replay.src;
+                    src = pkgs.fetchFromGitHub {
+                        owner = "jethrokuan";
+                        repo = "replay.fish";
+                        rev = "d2ecacd3fe7126e822ce8918389f3ad93b14c86c";
+                    };
                 }
             ];
         };
