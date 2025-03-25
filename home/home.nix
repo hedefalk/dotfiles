@@ -43,6 +43,20 @@
     programs = {
         fish = {
             enable = true;
+            plugins = [
+                {
+                    name = "z";
+                    src = pkgs.fishPlugins.z.src;
+                }
+                {
+                    name = "fzf";
+                    src = pkgs.fishPlugins.fzf.src;
+                }
+                {
+                    name = "replay";
+                    src = pkgs.fishPlugins.replay.src;
+                }
+            ];
         };
 
         starship = {

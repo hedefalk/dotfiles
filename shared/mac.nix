@@ -259,6 +259,7 @@
   users.users.viktor = {
     name = "viktor";
     home = "/Users/viktor";
+    shell = pkgs.fish;
   };
 
 }
