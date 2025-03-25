@@ -49,11 +49,22 @@
     programs = {
         fish = {
             enable = true;
+            # Instead of using the plugins option, load plugins manually
+            interactiveShellInit = ''
+              # Load fzf plugin
+              source ${pkgs.fishPlugins.fzf.src}/conf.d/fzf.fish
+
+              # Load z plugin
+              source ${pkgs.fishPlugins.z.src}/conf.d/z.fish
+
+              # Add other plugins similarly
+            '';
+
             plugins = [
-                {
-                    name = "z";
-                    src = pkgs.fishPlugins.z.src;
-                }
+                # {
+                #     name = "z";
+                #     src = pkgs.fishPlugins.z.src;
+                # }
                 # {
                 #     name = "fzf";
                 #     src = pkgs.fishPlugins.fzf.src;
