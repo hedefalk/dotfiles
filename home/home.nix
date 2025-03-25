@@ -52,14 +52,14 @@
                     name = "fzf";
                     src = pkgs.fishPlugins.fzf.src;
                 }
-                {
-                    name = "replay";
-                    src = pkgs.fetchFromGitHub {
-                        owner = "jethrokuan";
-                        repo = "replay.fish";
-                        rev = "d2ecacd3fe7126e822ce8918389f3ad93b14c86c";
-                    };
-                }
+                # {
+                #     name = "replay";
+                #     src = pkgs.fetchFromGitHub {
+                #         owner = "jethrokuan";
+                #         repo = "replay.fish";
+                #         rev = "d2ecacd3fe7126e822ce8918389f3ad93b14c86c";
+                #     };
+                # }
             ];
         };
 
