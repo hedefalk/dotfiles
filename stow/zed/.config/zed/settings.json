@@ -1,0 +1,286 @@
+// https://zed.dev/docs/configuring-zed
+// `open default settings` command
+{
+  "show_edit_predictions": true,
+
+  "assistant": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet-latest"
+    },
+    "version": "2"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "base_keymap": "VSCode",
+  "buffer_font_size": 12.0,
+  "buffer_font_family": "Zed Plex Mono",
+  "terminal": {
+    "font_size": 12,
+    "font_family": "Zed Plex Mono",
+    "blinking": "off",
+    "option_as_meta": false
+    // "shell": {
+    //   "with_arguments": {
+    //     "program": "/run/current-system/sw/bin/fish",
+    //     "args": []
+    //   }
+    // }
+  },
+  "auto_update": true,
+  "features": {
+    "edit_prediction_provider": "zed",
+    "copilot": true,
+    "file_search": true,
+    "git": true
+  },
+  "search": {
+    "include_ignored": false
+  },
+  "theme": {
+    "mode": "system",
+    "dark": "One Dark",
+    "light": "Catbox Latte"
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show": false
+  },
+  "line_indicator_format": "long",
+  "inlay_hints": {
+    "enabled": false
+  },
+  "project_panel": {
+    "default_width": 200,
+    "indent_size": 10,
+    "scrollbar": {
+      "show": "never"
+    }
+  },
+
+  // "assistant": {
+  //   "version": "1",
+  //   "provider": {
+  //     "default_model": "claude-3-5-sonnet",
+  //     "name": "anthropic"
+  //   }
+  // }
+  //
+  // {
+  "lsp": {
+    "nixd": {
+      "settings": {
+        "diagnostic": {
+          "suppress": ["sema-extra-with"]
+        }
+      }
+    },
+    "metals": {
+      "settings": {
+        "defaultBspToBuildTool": true,
+        "inlayHints": {
+          "inferredTypes": {
+            "enable": true,
+            "typeHints": true
+          }
+        },
+        "binary": {
+          "arguments": [
+            "-Dmetals.http=on",
+            "-Dmetals.enableScalafmtOnBuild=false"
+          ]
+        },
+        "initialization_options": {
+          "isHttpEnabled": true
+        }
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "rust": {
+          "analyzerTargetDir": true
+        }
+      },
+      "binary": {
+        "path_lookup": true
+      }
+    },
+    "protobuf-language-server": {
+      "binary": {
+        "path": "protols"
+      }
+    },
+    "vtsls": {
+      "settings": {
+        // For JavaScript:
+        "javascript": {
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": true
+            },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true
+            },
+            "propertyDeclarationTypes": {
+              "enabled": true
+            },
+            "functionLikeReturnTypes": {
+              "enabled": true
+            },
+            "enumMemberValues": {
+              "enabled": true
+            }
+          }
+        },
+        // For TypeScript:
+        "typescript": {
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "none",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": false
+            },
+            "variableTypes": {
+              "enabled": false,
+              "suppressWhenTypeMatchesName": true
+            },
+            "propertyDeclarationTypes": {
+              "enabled": false
+            },
+            "functionLikeReturnTypes": {
+              "enabled": false
+            },
+            "enumMemberValues": {
+              "enabled": false
+            }
+          }
+        },
+        "TSX": {
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "none",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": false
+            },
+            "variableTypes": {
+              "enabled": false,
+              "suppressWhenTypeMatchesName": true
+            },
+            "propertyDeclarationTypes": {
+              "enabled": false
+            },
+            "functionLikeReturnTypes": {
+              "enabled": false
+            },
+            "enumMemberValues": {
+              "enabled": false
+            }
+          }
+        }
+      }
+    },
+    "texlab": {
+      "settings": {
+        "texlab": {
+          "build": {
+            "onSave": true,
+            // "forwardSearchAfter": true,
+            "executable": "tectonic",
+            "args": [
+              "-X",
+              "compile",
+              "%f",
+              "--untrusted",
+              "--synctex",
+              "--keep-logs",
+              "--keep-intermediates"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "soft_wrap": "editor_width",
+  "languages": {
+    "Shell Script": {
+      "format_on_save": "off"
+    },
+    "TypeScript": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
+      "format_on_save": "on",
+      "edit_predictions_disabled_in": ["string"],
+      "inlay_hints": {
+        "enabled": false
+      }
+    },
+    "TSX": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."],
+      "show_signature_help_after_edits": false,
+      "show_edit_predictions": false,
+      "inlay_hints": {
+        "enabled": false
+      },
+      "format_on_save": "on"
+    },
+    "Plain Text": {
+      "inline_completion_provider": "none",
+      "inline_completions": "none",
+      "show_edit_predictions": false
+    },
+    "Nix": {
+      "language_servers": ["nixd", "!nil"],
+      "formatter": {
+        "external": {
+          "command": "alejandra", // or "nixfmt"
+          "arguments": ["--quiet", "--"]
+        }
+      }
+    },
+    "JavaScript": {
+      // "language_servers": ["typescript-language-server", "!vtsls", "..."]
+    }
+  },
+  "format_on_save": "off",
+  "auto_signature_help": true,
+  "use_autoclose": false,
+  // "shell": {
+  //   "with_arguments": {
+  //     "program": "/run/current-system/sw/bin/fish",
+  //     "args": []
+  //   }
+  // },
+  // "load_direnv": "shell_hook",
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings"
+  ],
+  "language_models": {
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "available_models": [
+        {
+          "name": "phi4",
+          "display_name": "Phi4 64K",
+          "max_tokens": 65536
+        }
+      ]
+    }
+  }
+}

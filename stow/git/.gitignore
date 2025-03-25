@@ -1,0 +1,11 @@
+metals.sbt
+.bsp
+.metals
+.vscode
+target
+.DS_Store
+sbt-launch.jar
+go.work
+go.work.sum
+.scala-build
+.env.local

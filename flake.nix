@@ -9,8 +9,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nix-darwin, home-manager }:
-
+  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager }:
   {
     darwinConfigurations = {
         Viktors-MacBook-Air = nix-darwin.lib.darwinSystem {
@@ -37,10 +36,10 @@
                 {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
+                    home-manager.extraSpecialArgs = { inherit self; }; # pass self (flake) to home.nix
                     home-manager.users.viktor = ./home/home.nix;
                 }
             ];
-
         };
     };
   };

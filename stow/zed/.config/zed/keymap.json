@@ -1,0 +1,35 @@
+[
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "tab": "menu::SelectNext"
+    }
+  },
+  {
+    "context": "Editor",
+    // "use_layout_keys": true, // https://github.com/zed-industries/zed/issues/20425#issuecomment-2551584271
+    "bindings": {
+      "cmd-shift-r": "pane::RevealInProjectPanel",
+      "cmd-alt-left": "pane::GoBack",
+      "cmd-alt-right": "pane::GoForward",
+      "cmd-<": null,
+      "cmd-shift-d": "editor::DuplicateLineDown",
+      "cmd-right": "editor::AcceptPartialInlineCompletion",
+      // "cmd-&": ["editor::ToggleComments", { "advance_downwards": false }], // https://github.com/zed-industries/zed/issues/20425#issuecomment-2550705171
+      "cmd-/": ["editor::ToggleComments", { "advance_downwards": false }]
+    }
+  },
+  {
+    "context": "Editor && !showing_completions",
+    "bindings": {
+      "tab": "editor::Indent"
+    }
+  },
+  {
+    "context": "ProjectSearchBar > Editor",
+    "bindings": {
+      "tab": "menu::SelectNext"
+    }
+  }
+
+]

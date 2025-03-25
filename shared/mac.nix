@@ -44,11 +44,10 @@
     nixpkgs-fmt
     pass
     stow
-    tectonic # latex
+    # tectonic # latex
     texlive.combined.scheme-full # couldn't get lua to work with tectonic, need lualatex
     vscode
     wget
-
   ];
 
   fonts.packages = [
@@ -215,10 +214,6 @@
   # Use a custom configuration.nix location.
   # darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin-configuration.nix";
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

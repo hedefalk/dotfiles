@@ -1,0 +1,54 @@
+[user]
+	name = Viktor Hedefalk
+	email = hedefalk@gmail.com
+[push]
+	default = simple
+[color]
+	ui = true
+[colors]
+	ui = true
+[core]
+  # pager = delta
+	editor = zed --wait
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	safecrlf = true
+[alias]
+  glog = log --date-order --date=format:'%Y-%m-%d' --all --pretty='format:%d %Cgreen%h%Creset %al %ad %s' --graph
+  #glog = log --all --pretty='format:%d %Cgreen%h%Creset %an %ad- %s' --graph
+
+#--date-order --date=format:'%Y-%m-%d %H:%M:%S'
+  status-all = "!for d in `find . -name \".git\"`; do echo \"\n*** Repository: $d ***\" && git --git-dir=$d --work-tree=$d/.. status; done"
+	# branches = branch --sort=-committerdate
+  branches = !"git for-each-ref --sort='-authordate:iso8601' --format=' %(color:green)%(authordate:iso8601)%09%(color:white)%(refname:short)' refs/heads"
+	ci = commit
+	co = checkout
+	st = status
+	br = branch
+  find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+[diff]
+  colorMoved = default
+
+[delta]
+    # plus-style = "syntax #012800"
+    # minus-style = "syntax #340001"
+    # syntax-theme = Monokai Extended
+  navigate = true
+  side-by-side = false
+
+[interactive]
+  # diffFilter = delta --color-only
+[init]
+  defaultBranch = main
+[pull]
+	ff = only
+[commit]
+	gpgSign = true
+[include]
+  # Include a non-vcs file for gpg hash for instance
+  path = .gitconfig-local
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

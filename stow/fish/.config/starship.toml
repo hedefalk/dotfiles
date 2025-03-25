@@ -1,0 +1,50 @@
+add_newline = false
+
+format = """\
+    $username\
+    $hostname\
+    $kubernetes\
+    $directory\
+    $git_branch\
+    $git_state\
+    $git_status\
+    $package\
+    $java\
+    $nodejs\
+    $python\
+    $ruby\
+    $rust\
+    $nix_shell\
+    $conda\
+    $memory_usage\
+    $aws\
+    $env_var\
+    $cmd_duration\
+    $line_break\
+    $jobs\
+    $battery\
+    $time\
+    $character\
+"""
+
+[kubernetes]
+# format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+disabled = false
+# detect_files = ['k8s']
+
+[git_status]
+# disabled = true
+
+[character]      # The name of the module we are configuring is "character"
+success_symbol = "🐟"     # The "symbol" segment is being set to "➜"
+error_symbol = "✗"
+
+[java]
+disabled = false
+format = "[${symbol}(${version} )]($style)"
+
+[nix_shell]
+format = '[$symbol$state( )]($style) '
+
+[battery]
+disabled = true
