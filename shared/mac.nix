@@ -83,6 +83,8 @@
       "alt-tab" # alternative switcher
       "arduino-ide"
       "bankid"
+      "bitwarden"
+      "bitwarden-cli"
       "blender"
       "calibre"
       "cardinal"
