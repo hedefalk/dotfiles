@@ -3,7 +3,7 @@
        # Get the absolute path of the flake directory
        flakePath = toString self.outPath;
        # Define dotfiles directory relative to the flake
-       dotfilesPath = "${flakePath}/stow"; # If dotfiles is a subdirectory in your flake
+       dotfilesPath = "${flakePath}/dots"; # If dotfiles is a subdirectory in your flake
   in {
     home.username = "viktor";
     home.homeDirectory = pkgs.lib.mkForce (
@@ -55,12 +55,12 @@
     };
 
     home.file = {
-        ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/.config/fish";
-        ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/.config/wezterm";
+        ".config/fish".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish";
+        ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}//wezterm";
         # ".config/zed/themes".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/.config/zed/themes";
-        ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/.config/zed/settings.json";
-        ".config/zed/keymap.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/.config/zed/keymap.json";
-        ".gitconfig".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitconfig";
+        ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/zed/settings.json";
+        ".config/zed/keymap.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/zed/keymap.json";
+        ".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitconfig";
         ".gitignore".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitignore";
     };
 
