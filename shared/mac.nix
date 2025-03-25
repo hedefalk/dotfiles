@@ -23,7 +23,6 @@
     coursier
     devenv
     docker
-    fish
     fzf # This is the PROGRAM fzf, in fisher there's integration with fish https://github.com/jethrokuan/fzf
     git
     git-lfs

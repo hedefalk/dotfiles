@@ -41,13 +41,16 @@
         );
 
     programs = {
+        fish = {
+            enable = true;
+        };
 
         starship = {
-                enable = true;
+            enable = true;
         };
 
         nushell = {
-        enable = true;
+            enable = true;
         };
     };
 
