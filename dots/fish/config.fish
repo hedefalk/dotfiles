@@ -4,13 +4,13 @@ set -x LC_ALL en_US.UTF-8
 set -x LANG en_US.UTF-8
 set -U fish_greeting ""
 
-# Install fisher and and declared packages
-if not functions -q fisher
-  set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-  curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-  fish -c fisher install
-  fisher update # update from fish_plugins in dotfiles
-end
+# # Install fisher and and declared packages
+# if not functions -q fisher
+#   set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+#   curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+#   fish -c fisher install
+#   fisher update # update from fish_plugins in dotfiles
+# end
 
 # Homebrew on M1
 if test -e '/opt/homebrew/bin/brew'
@@ -19,7 +19,7 @@ end
 # brew doesn't need to update _all_ the time
 set -x HOMEBREW_NO_AUTO_UPDATE true
 
- 
+
 # Prompt
 starship init fish | source
 

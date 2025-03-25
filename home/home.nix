@@ -54,10 +54,10 @@
                     name = "z";
                     src = pkgs.fishPlugins.z.src;
                 }
-                {
-                    name = "fzf";
-                    src = pkgs.fishPlugins.fzf.src;
-                }
+                # {
+                #     name = "fzf";
+                #     src = pkgs.fishPlugins.fzf.src;
+                # }
                 # {
                 #     name = "replay";
                 #     src = pkgs.fetchFromGitHub {
