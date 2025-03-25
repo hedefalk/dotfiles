@@ -26,6 +26,20 @@
                 }
             ];
         };
+        Air15 = nix-darwin.lib.darwinSystem {
+            system = "aarch64-darwin";
+            modules = [
+              ./shared/common.nix
+              ./shared/mac.nix
+              ./hosts/air.nix
+              home-manager.darwinModules.home-manager
+                {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.users.viktor = ./home/home.nix;
+                }
+            ];
+        };
         Viktors-Mac-Studio = nix-darwin.lib.darwinSystem {
             system = "aarch64-darwin";
             modules = [

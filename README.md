@@ -1,11 +1,30 @@
 # New Mac?
 
-*) Install nix
+1. Install nix
+
     sh <(curl -L https://nixos.org/nix/install)
 
+1. Clone this repo
+
+    git clone https://github.com/hedefalk/dotfiles.git
+    cd dotfiles
+
+1. Install nix-darwin
+
+1. Add a machine config in the main flake.nix and match it with the LocalHostName or any other means. I'm using LocalHostName.
+
+    darwin-rebuild switch --flake path:$HOME/dev/dotfiles/#(scutil --get LocalHostName)
+
+
+
+
+
+
+
+
 *) Create a gpg key
-gpg --full-generate-key
+
+    gpg --full-generate-key
 
 
-darwin-rebuild switch --flake path:$HOME/dev/dotfiles/nix#(scutil --get LocalHostName)
-darwin-rebuild switch --flake path:$HOME/dev/dotfiles2/flake#(scutil --get LocalHostName)
+    darwin-rebuild switch --flake path:$HOME/dev/dotfiles/nix#(scutil --get LocalHostName)
