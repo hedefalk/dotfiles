@@ -18,7 +18,7 @@
     any-nix-shell
     atuin # shell history sync
     awscli2
-    bitwarden-cli
+    # bitwarden-cli not building
     colima # docker-desktop alternative
     coreutils # gnu ls among things
     coursier
