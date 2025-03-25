@@ -5,7 +5,6 @@
        # Define dotfiles directory relative to the flake
        dotfilesPath = "${flakePath}/stow"; # If dotfiles is a subdirectory in your flake
   in {
-    nixpkgs.config.allowUnfree = true;
     home.username = "viktor";
     home.homeDirectory = pkgs.lib.mkForce (
         if pkgs.stdenv.isLinux
