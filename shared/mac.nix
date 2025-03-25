@@ -153,8 +153,8 @@
       "gmsh" # To view stl's
       "helm"
       "k3sup"
-      "koekeishiya/formulae/skhd"
-      "koekeishiya/formulae/yabai"
+      # "koekeishiya/formulae/skhd"
+      # "koekeishiya/formulae/yabai"
       "kubernetes-cli"
       "mas" # mac app store
       "mkcert" # create self-signed certs for dev env
