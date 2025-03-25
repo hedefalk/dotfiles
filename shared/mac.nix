@@ -211,13 +211,9 @@
   # adds shells to /ets/shells so I can use fish
   environment.shells = with pkgs; [ bashInteractive fish zsh ];
 
-  # Use a custom configuration.nix location.
-  # darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin-configuration.nix
-  # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin-configuration.nix";
-
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
   # system.defaults.dock = {
   #   autohide = true;
