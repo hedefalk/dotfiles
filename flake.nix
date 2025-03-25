@@ -22,6 +22,7 @@
                 {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
+                    home-manager.extraSpecialArgs = { inherit self; }; # pass self (flake) to home.nix
                     home-manager.users.viktor = ./home/home.nix;
                 }
             ];
@@ -36,6 +37,7 @@
                 {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
+                    home-manager.extraSpecialArgs = { inherit self; }; # pass self (flake) to home.nix
                     home-manager.users.viktor = ./home/home.nix;
                 }
             ];
