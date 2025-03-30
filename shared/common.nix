@@ -19,7 +19,12 @@
         # nerdctl
         certbot
         deno
+        fish
+        fishPlugins.fzf
+        fishPlugins.z
+        fzf
         git-filter-repo
+        nil # nix lang-server
         yazi
     ];
 

@@ -181,31 +181,32 @@
     zsh.enable = true;
     fish = {
         enable = true;
-        shellInit =
-        ''
-            alias dr="darwin-rebuild switch --flake path:$HOME/dev/dotfiles/nix#(scutil --get LocalHostName)"
-            alias dr:update="nix flake update path:$HOME/dev/dotfiles/nix"
-            # Nix
-            if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-            # echo 'bootstrapping Nix from nix-darwin'
-            replay source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-            end
+        # shellInit =
+        #
+        # ''
+        #     alias dr="darwin-rebuild switch --flake path:$HOME/dev/dotfiles/nix#(scutil --get LocalHostName)"
+        #     alias dr:update="nix flake update path:$HOME/dev/dotfiles/nix"
+        #     # Nix
+        #     if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        #     # echo 'bootstrapping Nix from nix-darwin'
+        #     replay source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+        #     end
 
-            # nix-darwin
-            if test -e '/etc/static/bashrc'
-            # echo '/etc/static/bashrc from nix-darwin'
-            replay source '/etc/static/bashrc'
-            end
+        #     # nix-darwin
+        #     if test -e '/etc/static/bashrc'
+        #     # echo '/etc/static/bashrc from nix-darwin'
+        #     replay source '/etc/static/bashrc'
+        #     end
 
-            # home-manager, needed even though plugin from nix-darwin
-            if test -e '/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh'
-            # echo 'source hm-session-vars'
-            replay source '/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh'
-            end
+        #     # home-manager, needed even though plugin from nix-darwin
+        #     if test -e '/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh'
+        #     # echo 'source hm-session-vars'
+        #     replay source '/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh'
+        #     end
 
-            # order paths so that nix is before built-ins https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
-            fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin
-        '';
+        #     # order paths so that nix is before built-ins https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
+        #     fish_add_path --move --prepend --path $HOME/.nix-profile/bin /run/wrappers/bin /etc/profiles/per-user/$USER/bin /nix/var/nix/profiles/default/bin /run/current-system/sw/bin
+        # '';
     };
   };
 
@@ -230,22 +231,54 @@
   # if it doesn't come back - something wrong with settings
 
 
-  system.defaults.CustomUserPreferences = {
-    # defaults domains - to list domains
-    # defaults read _domain_ to show settings
-    # Then stick stuff here:
-    "com.apple.dock" = {
-      autohide = 1;
-      tilesize = 20;
-      # otherwise sbt bsp makes kitty icon bounce on each scala source file save.
-      # better solution?
-      no-bouncing = true;
-    };
 
+  system.defaults = {
+    finder = {
+        AppleShowAllExtensions = true;
+        FXPreferredViewStyle = "clmv";
+    };
+    loginwindow.LoginwindowText = "REWARD IF LOST: hedefalk@gmail.com";
+    screencapture.location = "~/Screenshots";
+    screensaver.askForPasswordDelay = 10;
+
+        dock = {
+            autohide = true;
+            show-recents = false;
+            launchanim = true;
+            orientation = "bottom";
+            tilesize = 20;
+          };
+        # CustomUserPreferences = {
+        # # defaults domains - to list domains
+        # # defaults read _domain_ to show settings
+        # # Then stick stuff here:
+        # "com.apple.dock" = {
+        # autohide = 1;
+        # tilesize = 20;
+        # # otherwise sbt bsp makes kitty icon bounce on each scala source file save.
+        # # better solution?
+        # no-bouncing = true;
+        # };
+        NSGlobalDomain = {
+            _HIHideMenuBar = false;
+            AppleShowAllExtensions = true;
+            ApplePressAndHoldEnabled = false;
+
+            # 120, 90, 60, 30, 12, 6, 2
+            KeyRepeat = 2;
+
+            # 120, 94, 68, 35, 25, 15
+            InitialKeyRepeat = 15;
+
+            "com.apple.mouse.tapBehavior" = 1;
+            "com.apple.sound.beep.volume" = 0.0;
+            "com.apple.sound.beep.feedback" = 0;
+        };
+    };
     # Try to see if I can find a way to do this:
     # keyboard -> inputsources -> keyboard shortcuts, uncheck ctrl-space used for switching input source.
     # This is used for triggerSuggestion in vscode for instance
-  };
+
 
 
   # system.defaults.dock.orientation = "left";

@@ -77,6 +77,18 @@
         }
       }
     },
+    "nil": {
+      "initialization_options": {
+        "formatting": {
+          "command": ["alejandra", "--quiet", "--"] // or ["nixfmt"]
+        }
+      },
+      "settings": {
+        "diagnostics": {
+          "ignored": ["unused_binding"]
+        }
+      }
+    },
     "metals": {
       "settings": {
         "defaultBspToBuildTool": true,
@@ -239,7 +251,7 @@
       "show_edit_predictions": false
     },
     "Nix": {
-      "language_servers": ["nixd", "!nil"],
+      "language_servers": ["nil", "!nixd"],
       "formatter": {
         "external": {
           "command": "alejandra", // or "nixfmt"
@@ -247,6 +259,15 @@
         }
       }
     },
+    // "Nix": {
+    //   "language_servers": ["nixd", "!nil"],
+    //   "formatter": {
+    //     "external": {
+    //       "command": "alejandra", // or "nixfmt"
+    //       "arguments": ["--quiet", "--"]
+    //     }
+    //   }
+    // },
     "JavaScript": {
       // "language_servers": ["typescript-language-server", "!vtsls", "..."]
     }

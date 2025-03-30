@@ -12,7 +12,7 @@ config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 -- config.tab_bar_at_bottom = true
-
+config.default_prog = { '/run/current-system/sw/bin/fish', '-l' }
 config.colors = {
   tab_bar = {
   },

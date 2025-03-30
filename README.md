@@ -19,7 +19,12 @@ Install nix and homebrew. Homebrew is managed by nix-darwin, but it still needs 
 
 1. Add a machine config in the main flake.nix and match it with the LocalHostName or any other means. I'm using LocalHostName like this:
 
-        nix --extra-experimental-features "nix-command flakes" run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake path:$HOME/dev/dotfiles/#(scutil --get LocalHostName)
+        nix --extra-experimental-features "nix-command flakes" run nix-darwin/nix-darwin-24.11#darwin-rebuild -- switch --flake path:$HOME/dotfiles/#$(scutil --get LocalHostName)
+
+3. Still need to
+
+        chsh -s /run/current-system/sw/bin/fish
+
 
 LocalHostName is a main entry in [flake.nix](flake.nix).
 

@@ -4,21 +4,13 @@ set -x LC_ALL en_US.UTF-8
 set -x LANG en_US.UTF-8
 set -U fish_greeting ""
 
-# # Install fisher and and declared packages
-# if not functions -q fisher
-#   set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
-#   curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
-#   fish -c fisher install
-#   fisher update # update from fish_plugins in dotfiles
-# end
-
 # Homebrew on M1
 if test -e '/opt/homebrew/bin/brew'
   eval (/opt/homebrew/bin/brew shellenv)
 end
+
 # brew doesn't need to update _all_ the time
 set -x HOMEBREW_NO_AUTO_UPDATE true
-
 
 # Prompt
 starship init fish | source
@@ -49,8 +41,6 @@ function cppass --wraps pass
   pass $argv | tr -d '\n' | pbcopy
 end
 
-
-
 function ll --wraps ls
    ls -lh --time-style="+%Y-%m-%d" $argv
 end
@@ -72,15 +62,12 @@ end
 # # Need to set tty to current tty to be able to enter passphrase
 # set -x GPG_TTY (tty)
 
-
 set -e SSH_AGENT_PID
 if test -z $gnupg_SSH_AUTH_SOCK_BY; or test $gnupg_SSH_AUTH_SOCK_BY -ne $fish_pid
     set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 end
 set -gx GPG_TTY (tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
-
-
 
 # TODO: Check
 # https://gist.github.com/mcattarinussi/834fc4b641ff4572018d0c665e5a94d3?permalink_comment_id=4159058#gistcomment-4159058
@@ -95,13 +82,6 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 # gpgconf --kill gpg-agent
 # gpgconf --launch gpg-agent
 # or rerun block above
-
-# Pass doesn't work with vscode
-alias pass='env EDITOR=pico pass'
-#pass shit try 2, can't find original, command no not make it recursive
-# edit: look above :)
-
-#alias pass "set -x EDITOR zed --wait; command pass"
 
 if not type -q tailscale
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
@@ -126,7 +106,7 @@ if not set --query fish_private_mode
 end
 
 # Personal scripts
-set -x PATH "$HOME/bin:$PATH"
+set -x PATH "$HOME/scripts:$PATH"
 
 # Coursier binaries
 set -x PATH $PATH $HOME/Library/Application\ Support/Coursier/bin
