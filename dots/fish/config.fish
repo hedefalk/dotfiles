@@ -76,7 +76,7 @@ gpg-connect-agent updatestartuptty /bye >/dev/null
 # set -U -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
 # https://unix.stackexchange.com/questions/280879/how-to-get-pinentry-curses-to-start-on-the-correct-tty
-gpg-connect-agent updatestartuptty /bye >/dev/null
+# gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # If GPG doesn't work, kill and restart agent.
 # gpgconf --kill gpg-agent

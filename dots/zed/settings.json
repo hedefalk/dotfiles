@@ -3,12 +3,11 @@
 {
   "show_edit_predictions": true,
 
-  "assistant": {
+  "agent": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-7-sonnet-latest"
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4"
     },
-    "version": "2"
   },
   "telemetry": {
     "diagnostics": false,

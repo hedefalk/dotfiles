@@ -44,10 +44,10 @@ With that run I have access to all my cli tools as well as almost _all_ ui apps 
              	name = Viktor Hedefalk
               email = hedefalk@gmail.com
 
-    Probably can fix that if I want specific named/commented gpg keps, but I'm ok with the same name.
+    Probably can fix that if I want specific named/commented gpg keys, but I'm ok with the same name.
 
 
-5) Push this public key up to github and push any changes
+5) Push this public key up to github as a signing key
 
 
         gh auth login // no ssh keys
@@ -65,3 +65,18 @@ With that run I have access to all my cli tools as well as almost _all_ ui apps 
         git push
 
         // Still not working ? ^
+
+6) Also need to add an auth subkey and then push that up to github as an SSH key for authentication:
+
+
+    gpg --expert --edit-key YOUR_KEY_ID
+
+Choose (8), remove signing and encryption and just enable authentication, quit, choose 4096 bits and save.
+
+
+Upload to github:
+
+    gpg --export-ssh-key $(gpg --list-secret-keys --with-colons | awk -F: '/^ssb.*a/ {print $5}' | head -1) | gh ssh-key add - --title "M4 Air GPG SSH Key"
+
+
+Will need to authorize the cli to do this with the browser so could of course opt to not to it directly with browser.
