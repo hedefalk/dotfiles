@@ -2,12 +2,10 @@
 
 ## Prerequisites
 
-Install nix and homebrew. Homebrew is managed by nix-darwin, but it still needs to be installed. Also need Rosetta for just a couple of things (adobe-digital-editions for lending library books). Not gonna chase it since I need Rosetta for container stuff anyways.
+Install nix and homebrew. Homebrew is managed by nix-darwin, but it still needs to be installed. Also need Rosetta for just a couple of things (adobe-digital-editions for library books). Not gonna chase it since I need Rosetta for container stuff anyways.
 
     sh <(curl -L https://nixos.org/nix/install)
-
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
     sudo softwareupdate --install-rosetta
 
 ## Use this repo

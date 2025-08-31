@@ -21,7 +21,6 @@
     # bitwarden-cli not building
     colima # docker-desktop alternative
     coreutils # gnu ls among things
-    coursier
     devenv
     docker
     fzf # This is the PROGRAM fzf, in fisher there's integration with fish https://github.com/jethrokuan/fzf
@@ -31,7 +30,6 @@
     gitAndTools.gh
     gnupg
     grpcurl
-    jdk
     jetbrains-mono # font for editors and terminals
     k3sup
     k9s
@@ -159,7 +157,6 @@
       "kubernetes-cli"
       "mas" # mac app store
       "mkcert" # create self-signed certs for dev env
-      "nss" # to install certs into FF and Java with certutil
       "pinentry-mac" # gpg
       "wimlib" # To split windows iso files > 4GB for bootable USB
       # "chipmk/tap/docker-mac-net-connect"
@@ -280,7 +277,7 @@
     # This is used for triggerSuggestion in vscode for instance
 
 
-
+  system.primaryUser = "viktor";
   # system.defaults.dock.orientation = "left";
 
   # To activate settings according to https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236#i
@@ -289,6 +286,7 @@
     # Following line should allow us to avoid a logout/login cycle
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
+
 
   # Decoupled home-manager - can be used from nixos as well
   users.users.viktor = {

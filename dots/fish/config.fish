@@ -113,3 +113,6 @@ set -x PATH $PATH $HOME/Library/Application\ Support/Coursier/bin
 
 # Don't show extra prompt
 set -U devbox_no_prompt true
+
+# Allow zed to be run as root to use for editing system files (vifs)
+set -x ZED_ALLOW_ROOT true

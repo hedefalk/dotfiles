@@ -9,10 +9,8 @@
     protols
   ];
 
-
   programs = {
   };
-
 
   homebrew = {
     casks = [
