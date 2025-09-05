@@ -4,6 +4,7 @@
   "show_edit_predictions": true,
 
   "agent": {
+    "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
@@ -15,10 +16,10 @@
   },
   "base_keymap": "VSCode",
   "buffer_font_size": 12.0,
-  "buffer_font_family": "Zed Plex Mono",
+  "buffer_font_family": ".ZedMono",
   "terminal": {
     "font_size": 12,
-    "font_family": "Zed Plex Mono",
+    "font_family": ".ZedMono",
     "blinking": "off",
     "option_as_meta": false
     // "shell": {
@@ -41,7 +42,8 @@
   "theme": {
     "mode": "system",
     "dark": "One Dark",
-    "light": "Catbox Latte"
+    // "light": "Catbox Latte"
+    "light": "Ayu Light"
   },
   "tab_bar": {
     "show_nav_history_buttons": false,

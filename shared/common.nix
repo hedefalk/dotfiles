@@ -17,7 +17,7 @@
     environment.systemPackages = with pkgs; [
         # nix-direnv
         # nerdctl
-        bitwarden-cli
+        # bitwarden-cli
         certbot
         deno
         fish

@@ -24,10 +24,11 @@
     devenv
     docker
     fzf # This is the PROGRAM fzf, in fisher there's integration with fish https://github.com/jethrokuan/fzf
+    glab # Gitlab CLI
     git
     git-lfs
     gitAndTools.delta
-    gitAndTools.gh
+    github-cli
     gnupg
     grpcurl
     jetbrains-mono # font for editors and terminals
@@ -88,7 +89,7 @@
       "cardinal"
       "digikam"
       "discord"
-      "eloston-chromium"
+      "ungoogled-chromium"
       "librewolf"
       "freetube"
       "geekbench"
@@ -282,7 +283,7 @@
 
   # To activate settings according to https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236#i
   # but did not work for dock, see above
-  system.activationScripts.postUserActivation.text = ''
+  system.activationScripts.activateSettings.text = ''
     # Following line should allow us to avoid a logout/login cycle
     /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
   '';
