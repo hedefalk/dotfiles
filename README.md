@@ -64,6 +64,11 @@ With that run I have access to all my cli tools as well as almost _all_ ui apps 
 
         // Still not working ? ^
 
+TODO: ^: `ssh-add -L` should work?
+
+For github I just:
+    ssh-add -L | glab ssh-key add --title "GPG-derived SSH Key"
+
 6) Also need to add an auth subkey and then push that up to github as an SSH key for authentication:
 
 
@@ -78,3 +83,19 @@ Upload to github:
 
 
 Will need to authorize the cli to do this with the browser so could of course opt to not to it directly with browser.
+
+
+
+
+
+# TODO:
+- [ ] Use homebrew with  https://github.com/zhaofengli/nix-homebrew to remove installation step of homebrew
+
+
+
+# Vaultwarden
+bitwarden-cli intstalled via brew temporarily since nix derivation broken.
+
+bw config server https://vaultwarden.woodenstake.se
+
+Is this ^ a dotfile to be added here?

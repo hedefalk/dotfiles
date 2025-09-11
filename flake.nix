@@ -7,15 +7,19 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager }:
+  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager,
+    nix-homebrew
+  }:
   {
     darwinConfigurations = {
         Viktors-MacBook-Air = nix-darwin.lib.darwinSystem {
             system = "aarch64-darwin";
             modules = [
               ./shared/common.nix
+              # nix-homebrew.darwinModules.nix-homebrew
               ./shared/mac.nix
               ./hosts/air.nix
               home-manager.darwinModules.home-manager
@@ -31,6 +35,28 @@
             system = "aarch64-darwin";
             modules = [
               ./shared/common.nix
+              nix-homebrew.darwinModules.nix-homebrew
+              {
+                nix-homebrew = {
+                    # Install Homebrew under the default prefix
+                    enable = true;
+
+                    # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+                    enableRosetta = true;
+
+                    # User owning the Homebrew prefix
+                    user = "viktor";
+
+                    # Optional: Declarative tap management
+                    # taps = {
+                    # "homebrew/homebrew-core" = homebrew-core;
+                    # "homebrew/homebrew-cask" = homebrew-cask;
+                    # };
+
+                    # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+                    mutableTaps = true;
+                };
+              }
               ./shared/mac.nix
               ./hosts/air.nix
               home-manager.darwinModules.home-manager

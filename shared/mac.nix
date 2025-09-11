@@ -31,7 +31,7 @@
     github-cli
     gnupg
     grpcurl
-    jetbrains-mono # font for editors and terminals
+    # jetbrains-mono # font for editors and terminals - causing ttfautohint build issues, using nerd-fonts version instead
     k3sup
     k9s
     kind # k8s
@@ -44,7 +44,7 @@
     pass
     stow
     # tectonic # latex
-    texlive.combined.scheme-full # couldn't get lua to work with tectonic, need lualatex
+    # texlive.combined.scheme-full # couldn't get lua to work with tectonic, need lualatex
     vscode
     wget
   ];
@@ -148,6 +148,7 @@
     brews = [
       "awscli"
       "bun"
+      "bitwarden-cli"
       "datawire/blackbird/telepresence-arm64"
       "gitlab-ci-local"
       "gmsh" # To view stl's
