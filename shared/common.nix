@@ -18,6 +18,7 @@
         # nix-direnv
         # nerdctl
         # bitwarden-cli # https://github.com/NixOS/nixpkgs/issues/339576
+        bun
         certbot
         deno
         fish

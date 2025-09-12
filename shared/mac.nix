@@ -108,9 +108,9 @@
       "logseq" # notes
       "maccy"
       "microsoft-edge"
-      "microsoft-teams"
+      # "microsoft-teams"
       "mockoon"
-      "nordvpn"
+      # "nordvpn"
       "obs"
       "obsidian"
       "ollama" # nix-darwin wasn't merged, nixos only cuda and amd
@@ -147,7 +147,6 @@
     ];
     brews = [
       "awscli"
-      "bun"
       "bitwarden-cli"
       "datawire/blackbird/telepresence-arm64"
       "gitlab-ci-local"
