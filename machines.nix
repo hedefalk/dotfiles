@@ -2,7 +2,7 @@
 
 let
   inherit (inputs.self.lib) mkDarwinSystem;
-  
+
   # Machine configuration registry
   machines = {
     # MacBook Air - Development focused laptop

@@ -23,13 +23,13 @@ rec {
       # Base system configuration
       ../profiles/base.nix
       ../profiles/darwin.nix
-      
+
       # Feature-based modules
     ] ++ (mkFeatures (extraSpecialArgs.features or {})) ++ [
-      
+
       # Host-specific configuration
       ../hosts/${hostFile}.nix
-      
+
       # Home Manager integration
       inputs.home-manager.darwinModules.home-manager
       {
@@ -50,7 +50,7 @@ rec {
   mkDarwinSystems = configs: lib.mapAttrs (name: config: mkDarwinSystem (config // { hostname = name; })) configs;
 
   # Helper function to merge homebrew configurations
-  mergeHomebrew = configs: 
+  mergeHomebrew = configs:
     let
       mergeLists = key: lib.flatten (map (config: config.${key} or []) configs);
       mergeAttrs = key: lib.fold (a: b: a // b) {} (map (config: config.${key} or {}) configs);
@@ -68,7 +68,7 @@ rec {
 
   # Helper to conditionally include modules based on conditions
   optionalModule = condition: module: lib.optional condition module;
-  
+
   # Helper to create user configurations
   mkUser = {
     name,

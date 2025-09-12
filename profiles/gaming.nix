@@ -1,21 +1,17 @@
 { pkgs, lib, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    # Currently no gaming-specific system packages
+  environment.systemPackages = [
   ];
 
-  # Gaming-specific Homebrew packages (matching current setup)
   homebrew = {
     casks = [
-      # Gaming platforms
       "steam"
       "whisky" # Wine wrapper for Windows games
       "discord"
       "vlc"
       "spotify"
       "freetube"
-      # Performance monitoring
       "stats" # system monitor
       "obs"
     ];

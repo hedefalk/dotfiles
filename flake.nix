@@ -14,20 +14,20 @@
   let
     # Create our library functions
     lib = import ./lib { inherit inputs; };
-    
+
     # Import machine configurations
-    machineConfigs = import ./machines.nix { 
-      inherit inputs; 
-      lib = nixpkgs.lib; 
+    machineConfigs = import ./machines.nix {
+      inherit inputs;
+      lib = nixpkgs.lib;
     };
   in
   {
     # Export our library for use in other parts of the flake
     lib = lib;
-    
+
     # Generate darwin configurations using our abstractions
     darwinConfigurations = machineConfigs.darwinConfigurations;
-    
+
     # Optional: Export machine definitions for inspection
     machines = machineConfigs.machines;
   };
