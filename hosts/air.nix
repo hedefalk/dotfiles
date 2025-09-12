@@ -36,7 +36,7 @@ in
     # Battery optimization
     NSGlobalDomain = {
       # Slightly slower animations to save battery
-      NSWindowResizeTime = 0.2;
+      NSWindowResizeTime = lib.mkForce 0.2;
     };
   };
 

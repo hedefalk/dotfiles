@@ -44,22 +44,22 @@ in
     # Studio-specific optimizations for desktop workflow
     dock = {
       tilesize = lib.mkForce 32; # Larger dock for desktop with more screen real estate
-      magnification = true;
-      largesize = 48;
+      magnification = lib.mkForce true;
+      largesize = lib.mkForce 48;
     };
 
     # Desktop-optimized settings
     NSGlobalDomain = {
       # Faster animations for desktop use
-      NSWindowResizeTime = 0.1;
-
+      NSWindowResizeTime = lib.mkForce 0.1;
+      
       # Desktop keyboard settings
-      KeyRepeat = 1; # Fastest key repeat for productivity
-      InitialKeyRepeat = 8;
+      KeyRepeat = lib.mkForce 1; # Fastest key repeat for productivity
+      InitialKeyRepeat = lib.mkForce 8;
     };
 
     # Multiple monitor support
-    spaces.spans-displays = false; # Separate spaces per display
+    spaces.spans-displays = lib.mkForce false; # Separate spaces per display
   };
 
   # Studio-specific environment variables

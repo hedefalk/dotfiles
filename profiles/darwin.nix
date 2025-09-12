@@ -162,35 +162,35 @@
   # macOS system defaults
   system.defaults = {
     finder = {
-      AppleShowAllExtensions = true;
-      FXPreferredViewStyle = "clmv";
+      AppleShowAllExtensions = lib.mkDefault true;
+      FXPreferredViewStyle = lib.mkDefault "clmv";
     };
-    loginwindow.LoginwindowText = "REWARD IF LOST: hedefalk@gmail.com";
-    screencapture.location = "~/Screenshots";
-    screensaver.askForPasswordDelay = 10;
+    loginwindow.LoginwindowText = lib.mkDefault "REWARD IF LOST: hedefalk@gmail.com";
+    screencapture.location = lib.mkDefault "~/Screenshots";
+    screensaver.askForPasswordDelay = lib.mkDefault 10;
 
     dock = {
-      autohide = true;
-      show-recents = false;
-      launchanim = true;
-      orientation = "bottom";
+      autohide = lib.mkDefault true;
+      show-recents = lib.mkDefault false;
+      launchanim = lib.mkDefault true;
+      orientation = lib.mkDefault "bottom";
       tilesize = lib.mkDefault 20;
     };
 
     NSGlobalDomain = {
-      _HIHideMenuBar = false;
-      AppleShowAllExtensions = true;
-      ApplePressAndHoldEnabled = false;
+      _HIHideMenuBar = lib.mkDefault false;
+      AppleShowAllExtensions = lib.mkDefault true;
+      ApplePressAndHoldEnabled = lib.mkDefault false;
 
       # 120, 90, 60, 30, 12, 6, 2
-      KeyRepeat = 2;
+      KeyRepeat = lib.mkDefault 2;
 
       # 120, 94, 68, 35, 25, 15
-      InitialKeyRepeat = 15;
+      InitialKeyRepeat = lib.mkDefault 15;
 
-      "com.apple.mouse.tapBehavior" = 1;
-      "com.apple.sound.beep.volume" = 0.0;
-      "com.apple.sound.beep.feedback" = 0;
+      "com.apple.mouse.tapBehavior" = lib.mkDefault 1;
+      "com.apple.sound.beep.volume" = lib.mkDefault 0.0;
+      "com.apple.sound.beep.feedback" = lib.mkDefault 0;
     };
   };
 
