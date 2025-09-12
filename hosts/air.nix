@@ -7,14 +7,7 @@ in
   # Host-specific configuration for MacBook Air
   nixpkgs.hostPlatform = "aarch64-darwin";
   
-  # Enable features for this machine
-  imports = [
-    (mkFeatures {
-      development = true;
-      creative = false;
-      gaming = false;
-    }).imports
-  ];
+  # Features are handled automatically by the lib function
   
   # Host-specific packages
   environment.systemPackages = with pkgs; [

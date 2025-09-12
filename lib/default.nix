@@ -7,12 +7,13 @@ rec {
   # Helper function to create a darwin system configuration
   mkDarwinSystem = {
     hostname,
+    hostFile ? hostname,
     system ? "aarch64-darwin",
     modules ? [],
     extraSpecialArgs ? {},
     users ? { viktor = import ../home/home.nix; },
     homeExtraSpecialArgs ? {}
-  }: 
+  }:
   inputs.nix-darwin.lib.darwinSystem {
     inherit system;
     specialArgs = {
@@ -27,7 +28,7 @@ rec {
     ] ++ (mkFeatures (extraSpecialArgs.features or {})) ++ [
       
       # Host-specific configuration
-      ../hosts/${hostname}.nix
+      ../hosts/${hostFile}.nix
       
       # Home Manager integration
       inputs.home-manager.darwinModules.home-manager

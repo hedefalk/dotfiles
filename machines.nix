@@ -8,6 +8,7 @@ let
     # MacBook Air - Development focused laptop
     "Viktors-MacBook-Air" = {
       system = "aarch64-darwin";
+      hostFile = "air";
       features = {
         development = true;
         creative = false;
@@ -20,6 +21,7 @@ let
     # MacBook Air (alternative name) - Same config but with homebrew
     "Air15" = {
       system = "aarch64-darwin";
+      hostFile = "air";
       features = {
         development = true;
         creative = false;
@@ -42,6 +44,7 @@ let
     # Mac Studio - Full workstation with all features
     "Viktors-Mac-Studio" = {
       system = "aarch64-darwin";
+      hostFile = "studio";
       features = {
         development = true;
         creative = true;
@@ -61,6 +64,7 @@ in
     mkDarwinSystem {
       inherit hostname;
       inherit (config) system modules;
+      hostFile = config.hostFile;
       extraSpecialArgs = {
         features = config.features;
       };

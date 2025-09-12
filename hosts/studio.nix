@@ -7,14 +7,7 @@ in
   # Host-specific configuration for Mac Studio
   nixpkgs.hostPlatform = "aarch64-darwin";
   
-  # Enable features for this machine (studio has more capabilities)
-  imports = [
-    (mkFeatures {
-      development = true;
-      creative = true;
-      gaming = true;
-    }).imports
-  ];
+  # Features are handled automatically by the lib function
   
   # Host-specific packages
   environment.systemPackages = with pkgs; [

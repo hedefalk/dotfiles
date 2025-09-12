@@ -8,8 +8,8 @@
     '';
     settings = {
       trusted-users = [ "@admin" ];
-      auto-optimise-store = true;
     };
+    optimise.automatic = true;
   };
 
   # Allow unfree packages
