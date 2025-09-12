@@ -6,9 +6,9 @@ in
 {
   # Host-specific configuration for Mac Studio
   nixpkgs.hostPlatform = "aarch64-darwin";
-  
+
   # Features are handled automatically by the lib function
-  
+
   # Host-specific packages
   environment.systemPackages = with pkgs; [
     any-nix-shell
@@ -28,11 +28,11 @@ in
         "steam" # Gaming platform
         "karabiner-elements" # Advanced keyboard remapping
       ];
-      
+
       brews = [];
-      
+
       taps = [];
-      
+
       masApps = {
         bredbandskollen = 1147976909; # Internet speed test
       };
@@ -43,36 +43,27 @@ in
   system.defaults = {
     # Studio-specific optimizations for desktop workflow
     dock = {
-      tilesize = 32; # Larger dock for desktop with more screen real estate
+      tilesize = lib.mkForce 32; # Larger dock for desktop with more screen real estate
       magnification = true;
       largesize = 48;
     };
-    
+
     # Desktop-optimized settings
     NSGlobalDomain = {
       # Faster animations for desktop use
       NSWindowResizeTime = 0.1;
-      
+
       # Desktop keyboard settings
       KeyRepeat = 1; # Fastest key repeat for productivity
       InitialKeyRepeat = 8;
     };
-    
+
     # Multiple monitor support
     spaces.spans-displays = false; # Separate spaces per display
   };
 
   # Studio-specific environment variables
   environment.variables = {
-    # Desktop-specific settings
-    MACHINE_TYPE = "desktop";
-    
-    # Multi-monitor setup
-    DISPLAY_COUNT = "2";
-    
-    # Performance settings for more powerful hardware
-    NODE_OPTIONS = "--max-old-space-size=16384"; # More memory for Node.js
-    JAVA_OPTS = "-Xmx8g"; # More memory for Java applications
   };
 
   # Studio-specific services and daemons

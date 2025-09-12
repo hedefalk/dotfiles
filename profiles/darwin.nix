@@ -174,7 +174,7 @@
       show-recents = false;
       launchanim = true;
       orientation = "bottom";
-      tilesize = 20;
+      tilesize = lib.mkDefault 20;
     };
 
     NSGlobalDomain = {

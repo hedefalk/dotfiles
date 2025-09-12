@@ -72,7 +72,7 @@
   system.defaults = {
     # Optimize for creative work
     dock = {
-      tilesize = 48; # Larger icons for creative apps
+      tilesize = lib.mkDefault 48; # Larger icons for creative apps
     };
   };
 }

@@ -30,7 +30,7 @@ in
   system.defaults = {
     # Air-specific optimizations
     dock = {
-      tilesize = 16; # Smaller dock for laptop screen
+      tilesize = lib.mkForce 16; # Smaller dock for laptop screen
     };
     
     # Battery optimization
