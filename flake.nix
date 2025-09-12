@@ -10,79 +10,25 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager,
-    nix-homebrew
-  }:
-  {
-    darwinConfigurations = {
-        Viktors-MacBook-Air = nix-darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            modules = [
-              ./shared/common.nix
-              # nix-homebrew.darwinModules.nix-homebrew
-              ./shared/mac.nix
-              ./hosts/air.nix
-              home-manager.darwinModules.home-manager
-                {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.extraSpecialArgs = { inherit self; }; # pass self (flake) to home.nix
-                    home-manager.users.viktor = import ./home/home.nix;
-                }
-            ];
-        };
-        Air15 = nix-darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            modules = [
-              ./shared/common.nix
-              nix-homebrew.darwinModules.nix-homebrew
-              {
-                nix-homebrew = {
-                    # Install Homebrew under the default prefix
-                    enable = true;
-
-                    # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-                    enableRosetta = true;
-
-                    # User owning the Homebrew prefix
-                    user = "viktor";
-
-                    # Optional: Declarative tap management
-                    # taps = {
-                    # "homebrew/homebrew-core" = homebrew-core;
-                    # "homebrew/homebrew-cask" = homebrew-cask;
-                    # };
-
-                    # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
-                    mutableTaps = true;
-                };
-              }
-              ./shared/mac.nix
-              ./hosts/air.nix
-              home-manager.darwinModules.home-manager
-                {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.extraSpecialArgs = { inherit self; }; # pass self (flake) to home.nix
-                    home-manager.users.viktor = import ./home/home.nix;
-                }
-            ];
-        };
-        Viktors-Mac-Studio = nix-darwin.lib.darwinSystem {
-            system = "aarch64-darwin";
-            modules = [
-              ./shared/common.nix
-              ./shared/mac.nix
-              ./hosts/studio.nix
-              home-manager.darwinModules.home-manager
-                {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.extraSpecialArgs = { inherit self; }; # pass self (flake) to home.nix
-                    home-manager.users.viktor = import ./home/home.nix;
-                }
-            ];
-        };
+  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager, nix-homebrew }:
+  let
+    # Create our library functions
+    lib = import ./lib { inherit inputs; };
+    
+    # Import machine configurations
+    machineConfigs = import ./machines.nix { 
+      inherit inputs; 
+      lib = nixpkgs.lib; 
     };
+  in
+  {
+    # Export our library for use in other parts of the flake
+    lib = lib;
+    
+    # Generate darwin configurations using our abstractions
+    darwinConfigurations = machineConfigs.darwinConfigurations;
+    
+    # Optional: Export machine definitions for inspection
+    machines = machineConfigs.machines;
   };
 }

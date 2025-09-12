@@ -1,9 +1,9 @@
-{pkgs, config, self, lib, ...}:
+{pkgs, config, inputs, lib, ...}:
   let
     homeDirectory = "/Users/viktor";
     dotfilesPath = homeDirectory + "/dotfiles/dots"; # home-manager#2085
        # Get the absolute path of the flake directory
-       # flakePath = toString self.outPath;
+       # flakePath = toString inputs.self.outPath;
        # Define dotfiles directory relative to the flake
        # dotfilesPath = "${flakePath}/dots"; # If dotfiles is a subdirectory in your flake
   in {
