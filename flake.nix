@@ -7,10 +7,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager, nix-homebrew }:
+  outputs = inputs@{ nixpkgs, self, nix-darwin, home-manager,  }:
   let
     # Create our library functions
     lib = import ./lib { inherit inputs; };

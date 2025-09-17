@@ -29,15 +29,6 @@ let
       };
       modules = [
         # Enable nix-homebrew for this machine
-        inputs.nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = true;
-            user = "viktor";
-            mutableTaps = true;
-          };
-        }
       ];
     };
 

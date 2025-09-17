@@ -116,3 +116,29 @@ set -U devbox_no_prompt true
 
 # Allow zed to be run as root to use for editing system files (vifs)
 set -x ZED_ALLOW_ROOT true
+
+# Set Bitwarden session from macOS keychain
+if test (uname) = "Darwin"
+    set session_token (security find-generic-password -a "$USER" -s "bitwarden-session" -w 2>/dev/null)
+    if test $status -eq 0; and test -n "$session_token"
+        set -gx BW_SESSION $session_token
+    end
+end
+
+# Function to reload BW_SESSION from keychain
+function reload_bw_session
+    if test (uname) = "Darwin"
+        set session_token (security find-generic-password -a "$USER" -s "bitwarden-session" -w 2>/dev/null)
+        if test $status -eq 0; and test -n "$session_token"
+            set -gx BW_SESSION $session_token
+            echo "BW_SESSION reloaded successfully"
+        else
+            echo "Failed to retrieve Bitwarden session from keychain"
+        end
+    else
+        echo "This function is only for macOS"
+    end
+end
+
+# Alias for getting bitwarden session from keychain
+alias bw_store="security add-generic-password -a \"$USER\" -s \"bitwarden-session\" -w (bw unlock --raw)"

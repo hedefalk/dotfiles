@@ -2,20 +2,20 @@
 
 {
   # Darwin-specific configuration that applies to all macOS machines
-  
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # Nix configuration
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  
+
   # System packages specific to macOS
   environment.systemPackages = with pkgs; [
     # Development tools from existing config
-    (google-cloud-sdk.withExtraComponents [ 
-      google-cloud-sdk.components.gke-gcloud-auth-plugin 
+    (google-cloud-sdk.withExtraComponents [
+      google-cloud-sdk.components.gke-gcloud-auth-plugin
     ])
     act # local github actions
     ansible
@@ -72,7 +72,6 @@
       "alt-tab" # alternative switcher
       "arduino-ide"
       "bankid"
-      "bitwarden"
       "blender"
       "calibre"
       "cardinal"
@@ -145,6 +144,7 @@
       logic = 634148309;
       iordning = 1157906903;
       tailscale = 1475387142;
+      bitwarden = 1352778147;
     };
   };
 
@@ -201,7 +201,7 @@
 
   # Primary user configuration
   system.primaryUser = "viktor";
-  
+
   users.users.viktor = {
     name = "viktor";
     home = "/Users/viktor";

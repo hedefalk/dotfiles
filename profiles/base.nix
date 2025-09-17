@@ -7,7 +7,7 @@
       experimental-features = nix-command flakes
     '';
     settings = {
-      trusted-users = [ "@admin" ];
+      trusted-users = [ "viktor" ];
     };
     optimise.automatic = true;
   };
