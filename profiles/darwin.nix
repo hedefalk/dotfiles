@@ -167,6 +167,7 @@
     };
     loginwindow.LoginwindowText = lib.mkDefault "REWARD IF LOST: hedefalk@gmail.com";
     screencapture.location = lib.mkDefault "~/Screenshots";
+    screencapture.target = lib.mkDefault "clipboard";
     screensaver.askForPasswordDelay = lib.mkDefault 10;
 
     dock = {
