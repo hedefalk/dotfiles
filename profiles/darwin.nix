@@ -48,6 +48,7 @@
     lazygit
     mkcert
     neovim
+    ollama
     nixd # nix language server
     nixpkgs-fmt
     pass
