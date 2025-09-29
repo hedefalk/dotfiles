@@ -21,7 +21,7 @@ let
     # MacBook Air (alternative name) - Same config but with homebrew
     "Air15" = {
       system = "aarch64-darwin";
-      hostFile = "air";
+      hostFile = "air15";
       features = {
         development = true;
         creative = false;
