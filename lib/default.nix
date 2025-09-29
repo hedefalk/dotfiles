@@ -57,7 +57,7 @@ rec {
     in {
       enable = true;
       onActivation = {
-        autoUpdate = true;
+        autoUpdate = false;
         cleanup = "uninstall";
       };
       casks = mergeLists "casks";

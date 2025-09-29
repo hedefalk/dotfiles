@@ -71,7 +71,7 @@
   homebrew = {
     enable = true;
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
       cleanup = "uninstall";
     };
     casks = [
@@ -106,7 +106,6 @@
       "mockoon"
       "obs"
       "obsidian"
-      "ollama" # nix-darwin wasn't merged, nixos only cuda and amd
       "openscad@snapshot"
       "openshot-video-editor" # no good - couldn't do custom resolution or match input…?
       "orcaslicer"
