@@ -7,6 +7,7 @@
     nixd # nix language server
     ansible
     docker
+    claude-code
     colima
     # Kubernetes ecosystem
     kubectl
