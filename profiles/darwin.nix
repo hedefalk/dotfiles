@@ -15,6 +15,7 @@
   environment.variables = {
     # Set Homebrew auto-update to once per week (604800 seconds)
     # Default is 300 seconds (5 minutes), which is too frequent
+    # Not working in nix?
     HOMEBREW_AUTO_UPDATE_SECS = "604800";
   };
 
