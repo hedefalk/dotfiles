@@ -11,6 +11,13 @@
     experimental-features = nix-command flakes
   '';
 
+  # Environment variables
+  environment.variables = {
+    # Set Homebrew auto-update to once per week (604800 seconds)
+    # Default is 300 seconds (5 minutes), which is too frequent
+    HOMEBREW_AUTO_UPDATE_SECS = "604800";
+  };
+
   # System packages specific to macOS
   environment.systemPackages = with pkgs; [
     # Development tools from existing config
