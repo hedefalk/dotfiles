@@ -216,6 +216,9 @@
     shell = pkgs.fish;
   };
 
+  # Enable Touch ID for sudo
+  security.pam.services.sudo_local.touchIdAuth = true;
+
   # System state version
   system.stateVersion = 5;
 }
