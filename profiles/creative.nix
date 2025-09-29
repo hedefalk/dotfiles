@@ -8,21 +8,22 @@
   # Creative-specific Homebrew packages (matching current setup)
   homebrew = {
     casks = [
+      "adobe-digital-editions" # epub reader
+      "arduino-ide"
+      "blender"
+      "calibre" # ebook management
+      "cardinal"
+      "creality-print"
+      "digikam"
       "gimp"
       "inkscape"
-      "blender"
-      "openscad@snapshot"
       "kicad"
-      "arduino-ide"
+      "openscad@snapshot"
       "openshot-video-editor"
-      "rawtherapee"
-      "digikam"
-      "ultimaker-cura"
       "orcaslicer"
+      "rawtherapee"
+      "ultimaker-cura"
       "vcv-rack" # modular synth
-      "cardinal"
-      "calibre" # ebook management
-      "adobe-digital-editions" # epub reader
     ];
 
     brews = [
