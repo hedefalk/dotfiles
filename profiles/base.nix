@@ -43,6 +43,10 @@
     gitlab-ci-local
     glab # gitlab cli
     micro # editor
+    nodePackages.pnpm
+    (pkgs.writeShellScriptBin "claude" ''
+      ${pkgs.nodePackages.pnpm}/bin/pnpx @anthropic-ai/claude-code@latest "$@"
+    '')
     nil # nix lang-server
     yazi
   ];

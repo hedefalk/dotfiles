@@ -88,7 +88,7 @@ if not type -q tailscale
 end
 
 if not type -q dotfiles
-    alias dotfiles="$EDITOR ~/dev/dotfiles"
+    alias dotfiles="$EDITOR ~/dotfiles"
 end
 
 # direnv

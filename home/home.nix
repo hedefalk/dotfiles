@@ -34,13 +34,15 @@
 
         stateVersion = "24.11"; # Please read the comment before changing.
 
-    # The home.packages option allows you to install Nix packages into your
-    # environment.
       packages = with pkgs;
         [
             jq
             devbox
             bashInteractive
+            nodePackages.pnpm
+            (pkgs.writeShellScriptBin "claude-code" ''
+              ${pkgs.nodePackages.pnpm}/bin/pnpx @anthropic/claude-code@latest "$@"
+            '')
         ]
         ++ (
         if pkgs.stdenv.isLinux
