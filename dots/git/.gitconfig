@@ -13,6 +13,7 @@
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	safecrlf = true
+	pager = diff-so-fancy | less --tabs=4 -RF
 [alias]
   glog = log --date-order --date=format:'%Y-%m-%d' --all --pretty='format:%d %Cgreen%h%Creset %al %ad %s' --graph
   #glog = log --all --pretty='format:%d %Cgreen%h%Creset %an %ad- %s' --graph
@@ -37,6 +38,7 @@
   side-by-side = false
 
 [interactive]
+	diffFilter = diff-so-fancy --patch
   # diffFilter = delta --color-only
 [init]
   defaultBranch = main

@@ -139,6 +139,7 @@
       "bitwarden-cli"
       "datawire/blackbird/telepresence-arm64"
       "gitlab-ci-local"
+      "git-recent"
       "gmsh" # To view stl's
       "helm"
       "k3sup"

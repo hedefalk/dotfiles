@@ -35,6 +35,7 @@
     bun
     certbot
     deno
+    diff-so-fancy # git fancy diff
     fish
     fishPlugins.fzf
     fishPlugins.z
