@@ -20,7 +20,7 @@
           # ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/config.fish";
           ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/wezterm";
           # ".config/zed/themes".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/.config/zed/themes";
-          ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/zed/settings.json";
+          # ".config/zed/settings.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/zed/settings.json";
           ".config/zed/keymap.json".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/zed/keymap.json";
           ".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitconfig";
           ".gitignore".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitignore";
