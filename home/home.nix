@@ -37,7 +37,6 @@
       packages = with pkgs;
         [
             jq
-            devbox
             bashInteractive
             nodePackages.pnpm
             (pkgs.writeShellScriptBin "claude-code" ''

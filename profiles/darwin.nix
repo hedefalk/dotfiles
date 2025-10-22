@@ -33,6 +33,7 @@
     colima # docker-desktop alternative
     coreutils # gnu ls among things
     devenv
+    devbox
     docker
     fzf # This is the PROGRAM fzf, in fisher there's integration with fish
     glab # Gitlab CLI
@@ -54,6 +55,7 @@
     nixpkgs-fmt
     pass
     stow
+    tree
     vscode
     wget
   ];
