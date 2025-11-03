@@ -32,6 +32,12 @@ format = """\
 disabled = false
 # detect_files = ['k8s']
 
+[directory]
+disabled = false
+truncation_length = 3
+truncate_to_repo = true
+truncation_priority = 1
+
 [git_status]
 # disabled = true
 

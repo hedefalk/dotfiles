@@ -25,7 +25,7 @@
           ".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitconfig";
           ".gitignore".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/git/.gitignore";
           "scripts".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/scripts";
-          "./config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/starship.toml";
+          ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/starship.toml";
       };
 
         sessionVariables = {
