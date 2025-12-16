@@ -3,6 +3,7 @@
 	email = hedefalk@gmail.com
 [push]
 	default = simple
+	autoSetupRemote = true
 [color]
 	ui = true
 [colors]
@@ -27,6 +28,7 @@
 	st = status
 	br = branch
   find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+	branch-from-main = "!f() { git checkout -b \"$1\" origin/main --no-track; }; f"
 [diff]
   colorMoved = default
 
