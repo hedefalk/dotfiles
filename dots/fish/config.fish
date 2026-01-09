@@ -21,6 +21,14 @@ starship init fish | source
 
 # kubectl alias
 abbr --add k kubectl
+
+# claude-worktree alias
+abbr --add cw claude-worktree
+
+# Reload fish config
+function reload
+    source ~/.config/fish/config.fish
+end
 set -x KUBE_EDITOR "zed --wait"
 
 #gcloud

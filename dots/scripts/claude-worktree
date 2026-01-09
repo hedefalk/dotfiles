@@ -1,0 +1,307 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# claude-worktree: Manage isolated git worktree environments for Claude Code
+# Alias: cw
+
+MARKER_DIR=".claude-worktree"
+
+#------------------------------------------------------------------------------
+# Helpers
+#------------------------------------------------------------------------------
+
+die() {
+    echo "error: $1" >&2
+    exit 1
+}
+
+# Find sandbox root by looking for .claude-worktree marker directory
+find_sandbox_root() {
+    local dir="$PWD"
+    while [[ "$dir" != "/" ]]; do
+        if [[ -d "$dir/$MARKER_DIR" ]]; then
+            echo "$dir"
+            return 0
+        fi
+        dir="$(dirname "$dir")"
+    done
+    return 1
+}
+
+require_sandbox() {
+    local root
+    if ! root=$(find_sandbox_root); then
+        die "not in a claude-worktree sandbox (no $MARKER_DIR found)"
+    fi
+    echo "$root"
+}
+
+# Get default Claude settings JSON
+default_claude_settings() {
+    cat <<'EOF'
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllow": true,
+    "filesystem": {
+      "deniedPaths": ["~/.ssh", "~/.gnupg", "~/.aws"]
+    },
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "raw.githubusercontent.com",
+        "objects.githubusercontent.com",
+        "gitlab.com",
+        "bitbucket.org",
+        "npmjs.org",
+        "registry.npmjs.org",
+        "yarnpkg.com",
+        "pypi.org",
+        "files.pythonhosted.org",
+        "crates.io",
+        "static.crates.io",
+        "repo.maven.apache.org",
+        "central.sonatype.com",
+        "docs.rs",
+        "stackoverflow.com",
+        "cdn.jsdelivr.net"
+      ]
+    }
+  }
+}
+EOF
+}
+
+# Detect current worktree from PWD
+detect_current_worktree() {
+    local root
+    root=$(find_sandbox_root 2>/dev/null) || return 1
+
+    # Get the path relative to sandbox root
+    local rel_path="${PWD#$root}"
+    rel_path="${rel_path#/}"  # Remove leading slash
+
+    # Extract first component (the worktree name)
+    local worktree="${rel_path%%/*}"
+
+    if [[ -n "$worktree" ]] && [[ -d "$root/$worktree" ]]; then
+        echo "$worktree"
+        return 0
+    fi
+
+    return 1
+}
+
+#------------------------------------------------------------------------------
+# Commands
+#------------------------------------------------------------------------------
+
+cmd_clone() {
+    local repo_url="${1:-}"
+    local target_path="${2:-}"
+
+    [[ -z "$repo_url" ]] && die "usage: claude-worktree clone <repo-url> [path]"
+
+    # Derive name from repo URL if path not provided
+    if [[ -z "$target_path" ]]; then
+        local repo_name
+        repo_name=$(basename "$repo_url" .git)
+        target_path="$PWD/$repo_name"
+    fi
+
+    # Expand ~ to home directory
+    target_path="${target_path/#\~/$HOME}"
+
+    # Create sandbox directory and marker directory
+    mkdir -p "$target_path/$MARKER_DIR"
+
+    # Write repo URL to config file
+    echo "$repo_url" > "$target_path/$MARKER_DIR/config"
+
+    # Create default Claude settings
+    default_claude_settings > "$target_path/$MARKER_DIR/claude-settings.json"
+
+    # Clone into main/
+    git clone "$repo_url" "$target_path/main"
+
+    echo ""
+    echo "Sandbox created at: $target_path"
+    echo "  cd $target_path"
+    echo "  claude-worktree new <task-name>   # create worktree"
+    echo "  claude-worktree claude            # launch Claude Code"
+}
+
+cmd_new() {
+    local task_name="${1:-}"
+    local branch="${2:-}"
+
+    [[ -z "$task_name" ]] && die "usage: claude-worktree new <task-name> [branch]"
+
+    local root
+    root=$(require_sandbox)
+
+    local main_dir="$root/main"
+    local worktree_dir="$root/$task_name"
+
+    [[ ! -d "$main_dir" ]] && die "main worktree not found at $main_dir"
+    [[ -d "$worktree_dir" ]] && die "worktree '$task_name' already exists"
+
+    cd "$main_dir"
+
+    if [[ -n "$branch" ]]; then
+        # Create worktree from specified branch
+        echo "Creating worktree '$task_name' from $branch..."
+        git worktree add "$worktree_dir" -b "$task_name" "$branch"
+    else
+        # Create worktree from current HEAD
+        echo "Creating worktree '$task_name'..."
+        git worktree add "$worktree_dir" -b "$task_name"
+    fi
+
+    # Symlink shared CLAUDE.md if it exists and target doesn't
+    local shared_claude_md="$root/$MARKER_DIR/claude.md"
+    local target_claude_md="$worktree_dir/CLAUDE.md"
+    if [[ -f "$shared_claude_md" ]] && [[ ! -e "$target_claude_md" ]]; then
+        ln -s "$shared_claude_md" "$target_claude_md"
+    fi
+
+    echo ""
+    echo "Worktree created at: $worktree_dir"
+    echo "  cd $worktree_dir"
+}
+
+cmd_list() {
+    local root
+    root=$(require_sandbox)
+
+    echo "Sandbox: $root"
+    echo ""
+
+    # List directories (excluding hidden files)
+    for dir in "$root"/*/; do
+        [[ -d "$dir" ]] || continue
+        local name
+        name=$(basename "$dir")
+
+        if [[ -d "$dir/.git" ]] || [[ -f "$dir/.git" ]]; then
+            # It's a git worktree or repo
+            local branch
+            branch=$(git -C "$dir" branch --show-current 2>/dev/null || echo "detached")
+            if [[ "$name" == "main" ]]; then
+                echo "* $name ($branch)"
+            else
+                echo "  $name ($branch)"
+            fi
+        fi
+    done
+}
+
+cmd_remove() {
+    local task_name="${1:-}"
+
+    [[ -z "$task_name" ]] && die "usage: claude-worktree remove <task-name>"
+    [[ "$task_name" == "main" ]] && die "cannot remove main worktree"
+
+    local root
+    root=$(require_sandbox)
+
+    local worktree_dir="$root/$task_name"
+    local main_dir="$root/main"
+
+    [[ ! -d "$worktree_dir" ]] && die "worktree '$task_name' not found"
+
+    echo "Removing worktree '$task_name'..."
+
+    cd "$main_dir"
+    git worktree remove "$worktree_dir"
+
+    # Also delete the branch if it exists
+    if git branch --list "$task_name" | grep -q "$task_name"; then
+        git branch -d "$task_name" 2>/dev/null || true
+    fi
+
+    echo "Removed: $worktree_dir"
+}
+
+cmd_claude() {
+    local task_name="${1:-}"
+
+    local root
+    root=$(require_sandbox)
+
+    # If no task specified, detect from current directory or default to main
+    if [[ -z "$task_name" ]]; then
+        task_name=$(detect_current_worktree) || task_name="main"
+    fi
+
+    local worktree_dir="$root/$task_name"
+
+    [[ ! -d "$worktree_dir" ]] && die "worktree '$task_name' not found"
+
+    echo "Launching Claude Code (sandboxed) in $worktree_dir..."
+    cd "$worktree_dir"
+
+    # Settings file path
+    local settings_file="$root/$MARKER_DIR/claude-settings.json"
+
+    # Create default settings if file doesn't exist
+    if [[ ! -f "$settings_file" ]]; then
+        default_claude_settings > "$settings_file"
+    fi
+
+    # Symlink shared CLAUDE.md if it exists and target doesn't
+    local shared_claude_md="$root/$MARKER_DIR/claude.md"
+    local target_claude_md="$worktree_dir/CLAUDE.md"
+    if [[ -f "$shared_claude_md" ]] && [[ ! -e "$target_claude_md" ]]; then
+        ln -s "$shared_claude_md" "$target_claude_md"
+    fi
+
+    exec claude --settings "$settings_file"
+}
+
+cmd_help() {
+    cat <<EOF
+claude-worktree - Manage isolated git worktree environments for Claude Code
+
+USAGE:
+    claude-worktree <command> [args]
+    cw <command> [args]
+
+COMMANDS:
+    clone <repo-url> [path]     Clone a repo for sandbox development
+    new <task-name> [branch]    Create a new task-specific worktree
+    list                        List all worktrees in current sandbox
+    remove <task-name>          Remove a worktree
+    claude [task-name]          Launch Claude Code in sandbox mode (default: current or main)
+    help                        Show this help message
+
+EXAMPLES:
+    claude-worktree clone https://github.com/user/repo.git
+    claude-worktree clone https://github.com/user/repo.git ~/sandboxes/my-project
+    cd ~/sandboxes/my-project
+    claude-worktree new feature-auth
+    claude-worktree claude feature-auth
+EOF
+}
+
+#------------------------------------------------------------------------------
+# Main
+#------------------------------------------------------------------------------
+
+main() {
+    local cmd="${1:-help}"
+    shift || true
+
+    case "$cmd" in
+        clone)  cmd_clone "$@" ;;
+        new)    cmd_new "$@" ;;
+        list|ls) cmd_list "$@" ;;
+        remove|rm) cmd_remove "$@" ;;
+        claude) cmd_claude "$@" ;;
+        help|--help|-h) cmd_help ;;
+        *)      die "unknown command: $cmd (try 'claude-worktree help')" ;;
+    esac
+}
+
+main "$@"
