@@ -86,7 +86,13 @@ Will need to authorize the cli to do this with the browser so could of course op
 
 
 
+## Push SSH key to remote server via local network
 
+On new Mac:
+    printf "Serving at: %s:9999\n" "$(ipconfig getifaddr en0)" && ssh-add -L | nc -l 9999
+
+On Mac with existing server access:
+    nc <IP> 9999 | ssh user@server "cat >> ~/.ssh/authorized_keys"
 
 # TODO:
 - [ ] Use homebrew with  https://github.com/zhaofengli/nix-homebrew to remove installation step of homebrew
