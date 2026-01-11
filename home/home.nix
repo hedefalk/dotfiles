@@ -37,6 +37,8 @@ in
         config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/starship.toml";
       ".config/fish/functions".source =
         config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/fish/functions";
+      "Library/Application\ Support/Cyborus.forgejo-cli/client_ids".source =
+        config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/forgejo-cli/client_ids";
     };
 
     sessionVariables = {
