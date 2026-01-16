@@ -1,4 +1,9 @@
-{ pkgs, lib, hostname, ... }:
+{
+  pkgs,
+  lib,
+  hostname,
+  ...
+}:
 
 {
   # Darwin-specific configuration that applies to all macOS machines
@@ -125,8 +130,8 @@
       "ultimaker-cura"
       "vcv-rack" # modular synth
       "vlc"
-      "wezterm"
-      "whisky" #wine windows emulator
+      "wezterm@nightly"
+      "whisky" # wine windows emulator
       "zed@preview" # text editor"
       "zoom" # zoom.us
     ];
@@ -168,7 +173,11 @@
   };
 
   # Available shells
-  environment.shells = with pkgs; [ bashInteractive fish zsh ];
+  environment.shells = with pkgs; [
+    bashInteractive
+    fish
+    zsh
+  ];
 
   # macOS system defaults
   system.defaults = {
