@@ -22,6 +22,11 @@ starship init fish | source
 # kubectl alias
 abbr --add k kubectl
 
+# Merge colima k3s kubeconfig into main kubeconfig
+function colima-kubeconfig
+    colima ssh -- cat /etc/rancher/k3s/k3s.yaml | sed 's/: default$/: colima/g' > /tmp/colima.yaml && KUBECONFIG=/tmp/colima.yaml:~/.kube/config kubectl config view --flatten > /tmp/merged.yaml && mv /tmp/merged.yaml ~/.kube/config
+end
+
 # claude-worktree alias
 abbr --add cw claude-worktree
 
