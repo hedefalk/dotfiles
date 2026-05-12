@@ -36,7 +36,6 @@ disabled = false
 disabled = false
 truncation_length = 3
 truncate_to_repo = true
-truncation_priority = 1
 
 [git_status]
 # disabled = true

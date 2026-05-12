@@ -25,12 +25,24 @@
 
   # Common environment variables
   environment.variables = {
-    EDITOR = "zed --wait";
-    VISUAL = "zed --wait";
+    EDITOR = "zed-wait";
+    VISUAL = "zed-wait";
   };
 
   # Core system packages that should be available everywhere
   environment.systemPackages = with pkgs; [
+    # LaTeX with LuaTeX support
+    (texlive.combine {
+      inherit (texlive)
+        scheme-small
+        luatex
+        lualatex-math
+        fontspec
+        luacode
+        latexmk
+        collection-fontsrecommended;
+    })
+
     # Development essentials
     bun
     certbot

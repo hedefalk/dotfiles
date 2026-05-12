@@ -1,7 +1,7 @@
 {pkgs, config, inputs, lib, ...}:
   let
     homeDirectory = "/Users/viktor";
-    dotfilesPath = homeDirectory + "/dotfiles/dots"; # home-manager#2085
+    dotfilesPath = homeDirectory + "/dev/dotfiles2/dots"; # home-manager#2085 FIXME!!!!
        # Get the absolute path of the flake directory
        # flakePath = toString inputs.self.outPath;
        # Define dotfiles directory relative to the flake
@@ -29,7 +29,7 @@
       };
 
         sessionVariables = {
-            EDITOR = "zed";
+            EDITOR = "zed-wait";
         };
 
         stateVersion = "24.11"; # Please read the comment before changing.

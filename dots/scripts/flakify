@@ -6,4 +6,4 @@ elif [ ! -e .envrc ]; then
 echo "use flake" > .envrc
 direnv allow
 fi
-${EDITOR:-zed} flake.nix
+${EDITOR:-zed --wait} flake.nix
